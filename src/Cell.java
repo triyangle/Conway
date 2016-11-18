@@ -60,7 +60,7 @@ public class Cell {
 	}
 
 	public boolean getAliveNextTurn() {
-		
+
 		return myAliveNextTurn;
 	}
 
@@ -73,13 +73,13 @@ public class Cell {
 	}
 
 	public static void calcNeighbors(Cell[][] cell) {
-		
+
 		for(int row = 0; row < Display.ROWS; row++) {
 
 			for(int col = 0; col < Display.COLS; col++) {
-				
+
 				int aliveNeighbors = 0;
-				
+
 				Neighbor [] neighbors = new Neighbor[8];
 
 				if(row == 0 && col == 0) {
@@ -94,9 +94,9 @@ public class Cell {
 					neighbors[7] = new Neighbor(99,79);
 
 				} else {
-				
+
 				if(row == 0 && col == 99) {
-					
+
 					neighbors[0] = new Neighbor(98,0);
 					neighbors[1] = new Neighbor(98,1);
 					neighbors[2] = new Neighbor(99,1);
@@ -105,11 +105,11 @@ public class Cell {
 					neighbors[5] = new Neighbor(79,0);
 					neighbors[6] = new Neighbor(99,79);
 					neighbors[7] = new Neighbor(98,79);
-				
+
 				} else {
-				
+
 				if(row == 79 && col == 0) {
-					
+
 					neighbors[0] = new Neighbor(0,78);
 					neighbors[1] = new Neighbor(1,78);
 					neighbors[2] = new Neighbor(1,79);
@@ -118,11 +118,11 @@ public class Cell {
 					neighbors[5] = new Neighbor(99,0);
 					neighbors[6] = new Neighbor(99,78);
 					neighbors[7] = new Neighbor(99,79);
-				
+
 				} else {
-					
+
 				if(row == 79 && col == 99) {
-					
+
 					neighbors[0] = new Neighbor(99,78);
 					neighbors[1] = new Neighbor(98,78);
 					neighbors[2] = new Neighbor(98, 79);
@@ -131,11 +131,11 @@ public class Cell {
 					neighbors[5] = new Neighbor(99,0);
 					neighbors[6] = new Neighbor(0,78);
 					neighbors[7] = new Neighbor(0,79);
-			
+
 				} else {
-				
+
 				if(row == 0 && col != 0 && col != 99) {
-					
+
 					neighbors[0] = new Neighbor((col-1),row);
 					neighbors[1] = new Neighbor((col+1),row);
 					neighbors[2] = new Neighbor((col-1),(row+1));
@@ -144,11 +144,11 @@ public class Cell {
 					neighbors[5] = new Neighbor((col-1),79);
 					neighbors[6] = new Neighbor(col,79);
 					neighbors[7] = new Neighbor((col+1),79);
-					
+
 				} else {
-					
+
 				if(row == 79 && col != 0 && col != 99) {
-					
+
 					neighbors[0] = new Neighbor((col-1),row);
 					neighbors[1] = new Neighbor((col+1),row);
 					neighbors[2] = new Neighbor((col-1),(row-1));
@@ -157,11 +157,11 @@ public class Cell {
 					neighbors[5] = new Neighbor((col-1),0);
 					neighbors[6] = new Neighbor(col,0);
 					neighbors[7] = new Neighbor((col+1),0);
-					
+
 				} else {
-					
+
 				if(col == 0 && row != 0 && row != 99) {
-					
+
 					neighbors[0] = new Neighbor(col,(row-1));
 					neighbors[1] = new Neighbor(col,(row+1));
 					neighbors[2] = new Neighbor((col+1),(row-1));
@@ -170,11 +170,11 @@ public class Cell {
 					neighbors[5] = new Neighbor(99,(row-1));
 					neighbors[6] = new Neighbor(99,row);
 					neighbors[7] = new Neighbor(99,(row+1));
-		
+
 				} else {
-					
+
 				if(col == 99 && row != 0 && row != 99) {
-					
+
 					neighbors[0] = new Neighbor(col,(row-1));
 					neighbors[1] = new Neighbor(col,(row+1));
 					neighbors[2] = new Neighbor((col-1),(row-1));
@@ -183,9 +183,9 @@ public class Cell {
 					neighbors[5] = new Neighbor(0,(row-1));
 					neighbors[6] = new Neighbor(0,row);
 					neighbors[7] = new Neighbor(0,(row+1));
-					
+
 				} else {
-					
+
 					neighbors[0] = new Neighbor((col-1),(row-1));
 					neighbors[1] = new Neighbor(col,(row-1));
 					neighbors[2] = new Neighbor((col+1),(row-1));
@@ -194,7 +194,7 @@ public class Cell {
 					neighbors[5] = new Neighbor((col-1),(row+1));
 					neighbors[6] = new Neighbor(col,(row+1));
 					neighbors[7] = new Neighbor((col+1),(row+1));
-					
+
 				}
 				}
 				}
@@ -213,25 +213,25 @@ public class Cell {
 					}
 
 				}
-				
+
 				if(cell[row][col].getAlive() == true) {
-					
+
 					if(aliveNeighbors <= 1 || aliveNeighbors >= 4) {
-						
+
 						cell[row][col].setAliveNextTurn(false);
-												
+
 					} else {
-						
+
 						cell[row][col].setAliveNextTurn(true);
-						
+
 					}
-					
+
 				} else {
-					
+
 				if(cell[row][col].getAlive() == false) {
-						
+
 					if(aliveNeighbors == 3) {
-						
+
 						cell[row][col].setAliveNextTurn(true);
 
 					} else {
@@ -251,7 +251,7 @@ public class Cell {
 	}
 
 
-	
+
 
 	public void draw(int x_offset, int y_offset, int width, int height,
 			Graphics g) {

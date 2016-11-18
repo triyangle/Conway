@@ -3,7 +3,7 @@
  *
  * Latest update on April 21, 2011
  */
- 
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -31,7 +31,7 @@ public class Display extends JComponent implements MouseListener, MouseMotionLis
 	private final int CELL_HEIGHT = 5;
 
 	// Note that a final field can be initialized in constructor
-	private final int DISPLAY_WIDTH;   
+	private final int DISPLAY_WIDTH;
 	private final int DISPLAY_HEIGHT;
 	private StartButton startStop;
 	private boolean paintloop = false;
@@ -88,7 +88,7 @@ public class Display extends JComponent implements MouseListener, MouseMotionLis
 				cell[row][col] = new Cell(row, col);
 			}
 		}
-		
+
 		cell[0][0].setAlive(true);
 		cell[79][99].setAlive(true);
 		cell[3][2].setAlive(true);
@@ -122,7 +122,7 @@ public class Display extends JComponent implements MouseListener, MouseMotionLis
 		}
 	}
 
-	
+
 	void drawCells(Graphics g) {
 		// Have each cell draw itself
 		for (int row = 0; row < ROWS; row++) {
@@ -145,31 +145,31 @@ public class Display extends JComponent implements MouseListener, MouseMotionLis
 	private void nextGeneration() {
 
 		Cell.calcNeighbors(cell);
-		
+
 		for(int row = 0; row < ROWS; row++) {
-			
+
 			for(int col = 0; col < COLS; col++) {
-				
+
 				if(cell[row][col].getAliveNextTurn() == true) {
-					
+
 					cell[row][col].setAlive(true);
-					
+
 				} else {
-				
+
 				if(cell[row][col].getAliveNextTurn() == false) {
-					
+
 					cell[row][col].setAlive(false);
-					
+
 				}
-				
+
 				}
-				
+
 			}
-				
+
 		}
-		
+
 		repaint();
-		
+
 
 	}
 
@@ -177,40 +177,40 @@ public class Display extends JComponent implements MouseListener, MouseMotionLis
 
 		int x = arg0.getX();
 		int y = arg0.getY();
-				
+
 		for(int row = 0; row < ROWS; row++) {
-			
+
 			for(int col = 0; col < COLS; col++) {
-				
-				int ybottom = Y_GRID_OFFSET + CELL_HEIGHT + (row * (CELL_HEIGHT + 1)); 
+
+				int ybottom = Y_GRID_OFFSET + CELL_HEIGHT + (row * (CELL_HEIGHT + 1));
 				int xright = X_GRID_OFFSET + CELL_WIDTH + (col * (CELL_WIDTH + 1));
-				
+
 				int xleft = X_GRID_OFFSET + (col * (CELL_WIDTH + 1));
 				int ytop = Y_GRID_OFFSET + (row * (CELL_HEIGHT + 1));
-				
+
 				if(((x < xright) && (y < ybottom)) && ((x > xleft) && (y > ytop)) && cell[row][col].getAlive() == false) {
-					
+
 					cell[row][col].setAlive(true);
 					repaint();
-					
+
 				} else {
-				
+
 				if(((x < xright) && (y < ybottom)) && ((x > xleft) && (y > ytop)) && cell[row][col].getAlive() == true) {
-					
+
 					cell[row][col].setAlive(false);
 					repaint();
-					
+
 				}
-			
+
 				}
-				
+
 			}
-			
+
 		}
-		
+
 		//System.out.println(x);
 		//System.out.println(y);
-		
+
 	}
 
 
@@ -240,32 +240,32 @@ public class Display extends JComponent implements MouseListener, MouseMotionLis
 
 
 	public void mouseMoved(MouseEvent arg0) {
-		
+
 	}
-	
+
 
 	private class StartButton extends JButton implements ActionListener {
-		
+
 		StartButton() {
 			super("Start");
 			addActionListener(this);
 		}
 
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 			nextGeneration(); // test the start button
-			
+
 			if(this.getText().equals("Start")) {
-				
+
 				togglePaintLoop();
 				setText("Stop");
-			
+
 			} else {
-				
+
 				togglePaintLoop();
 				setText("Start");
 			}
-			
+
 			repaint();
 		}
 	}
